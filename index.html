@@ -71,6 +71,7 @@
       flex-direction: column;
       justify-content: center;
       overflow: hidden;
+      position: relative;
     }
     .right h1 {
       font-size: 2.5em;
@@ -98,8 +99,8 @@
       color: #88caa2; /* soft mint */
     }
     .podcast-link {
-      margin-top: auto;
-      padding-bottom: 10px;
+      position: absolute;
+      bottom: 30px;
       font-size: 0.8em;
       opacity: 0.65;
     }
@@ -151,6 +152,9 @@
       }
       .right .links a {
         font-size: 1em;
+      }
+      .podcast-link {
+        bottom: 15px;
       }
     }
   </style>
