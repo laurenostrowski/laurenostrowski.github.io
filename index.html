@@ -71,6 +71,7 @@
       flex-direction: column;
       justify-content: center;
       overflow: hidden;
+      position: relative;
     }
     .right h1 {
       font-size: 2.5em;
@@ -97,7 +98,21 @@
     .right .links a:hover {
       color: #88caa2; /* soft mint */
     }
-     /* Mobile view */
+    .podcast-link {
+      position: absolute;
+      bottom: 30px;
+      font-size: 0.8em;
+      opacity: 0.65;
+    }
+    .podcast-link a {
+      color: white;
+      text-decoration: none;
+    }
+    .podcast-link a:hover {
+      color: #88caa2;
+      opacity: 1;
+    }
+    /* Mobile view */
     @media (max-width: 768px) {
       body {
         margin: 0;
@@ -138,6 +153,9 @@
       .right .links a {
         font-size: 1em;
       }
+      .podcast-link {
+        bottom: 15px;
+      }
     }
   </style>
 </head>
@@ -155,6 +173,9 @@
         <a href="https://www.linkedin.com/in/laurenmostrowski/">LinkedIn</a>
         <a href="https://github.com/laurenostrowski">GitHub</a>
         <a href="https://scholar.google.com/citations?user=XdgpcSwAAAAJ&hl">Publications</a>
+      </div>
+      <div class="podcast-link">
+        <a href="https://open.spotify.com/episode/2lfh8EhpTMperYY5MVGP7R" target="_blank">🎙️ Podcast</a>
       </div>
     </div>
   </div>
