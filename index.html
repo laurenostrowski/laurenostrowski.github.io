@@ -71,7 +71,6 @@
       flex-direction: column;
       justify-content: center;
       overflow: hidden;
-      position: relative;
     }
     .right h1 {
       font-size: 2.5em;
@@ -99,8 +98,8 @@
       color: #88caa2; /* soft mint */
     }
     .podcast-link {
-      position: absolute;
-      bottom: 30px;
+      margin-top: auto;
+      padding-bottom: 10px;
       font-size: 0.8em;
       opacity: 0.65;
     }
@@ -135,7 +134,7 @@
         background: url('headshot_2024.jpg') center/cover no-repeat;
       }
       .right {
-        flex: none;
+        flex: 1;
         width: 100%;
         padding: 20px;
         text-align: center;
@@ -152,9 +151,6 @@
       }
       .right .links a {
         font-size: 1em;
-      }
-      .podcast-link {
-        bottom: 15px;
       }
     }
   </style>
