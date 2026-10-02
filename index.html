@@ -112,6 +112,38 @@
       color: #88caa2;
       opacity: 1;
     }
+    .email-icon {
+      position: absolute;
+      top: 30px;
+      right: 30px;
+      color: white;
+      opacity: 0.85;
+      line-height: 0;
+    }
+    .email-icon:hover {
+      color: #88caa2; /* soft mint */
+      opacity: 1;
+    }
+    .email-icon svg {
+      width: 26px;
+      height: 26px;
+    }
+    .email-toast {
+      position: absolute;
+      top: 64px;
+      right: 30px;
+      background: #88caa2; /* soft mint */
+      color: #1e3230;      /* sea moss */
+      font-size: 0.85em;
+      padding: 6px 10px;
+      border-radius: 4px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s;
+    }
+    .email-toast.show {
+      opacity: 1;
+    }
     /* Mobile view */
     @media (max-width: 768px) {
       body {
@@ -158,6 +190,14 @@
       .podcast-link {
         bottom: 30px;
       }
+      .email-icon {
+        top: 20px;
+        right: 20px;
+      }
+      .email-toast {
+        top: 54px;
+        right: 20px;
+      }
     }
   </style>
 </head>
@@ -165,6 +205,13 @@
   <div class="container">
     <div class="left"></div>
     <div class="right">
+      <a class="email-icon" id="email-link" href="#" aria-label="Email" title="Email">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="3" y="5" width="18" height="14" rx="2"/>
+          <path d="M3 7l9 6 9-6"/>
+        </svg>
+      </a>
+      <div class="email-toast" id="email-toast" role="status" aria-live="polite"></div>
       <h2>COMPUTATIONAL NEUROSCIENCE  /  NEUROENGINEERING  /  SPEECH & LANGUAGE</h2>
       <p> </p>
       <h1>Lauren Ostrowski</h1>
@@ -181,5 +228,55 @@
       </div>
     </div>
   </div>
+  <script>
+    (function () {
+      var link = document.getElementById("email-link");
+      var toast = document.getElementById("email-toast");
+      var timer;
+
+      function addr() {
+        var u = "lostrows";
+        var d = "health.ucsd.edu";
+        return u + "@" + d;
+      }
+
+      function showToast(msg) {
+        toast.textContent = msg;
+        toast.classList.add("show");
+        clearTimeout(timer);
+        timer = setTimeout(function () { toast.classList.remove("show"); }, 3000);
+      }
+
+      function fallbackCopy(text) {
+        var ta = document.createElement("textarea");
+        ta.value = text;
+        ta.setAttribute("readonly", "");
+        ta.style.position = "absolute";
+        ta.style.left = "-9999px";
+        document.body.appendChild(ta);
+        ta.select();
+        var ok = false;
+        try { ok = document.execCommand("copy"); } catch (e) {}
+        document.body.removeChild(ta);
+        return ok;
+      }
+
+      link.addEventListener("click", function (e) {
+        e.preventDefault();
+        var a = addr();
+
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(a).then(
+            function () { showToast("Copied: " + a); },
+            function () { showToast(fallbackCopy(a) ? "Copied: " + a : a); }
+          );
+        } else {
+          showToast(fallbackCopy(a) ? "Copied: " + a : a);
+        }
+
+        window.location.href = "mailto:" + a;
+      });
+    })();
+  </script>
 </body>
 </html>
